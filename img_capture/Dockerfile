@@ -14,4 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt install -y python3-opencv python3-pip vim-tiny mosquitto-clients libopencv-dev
 RUN pip3 install paho-mqtt
 
-WORKDIR /
+WORKDIR /root
+COPY face_capture.py .
+
+CMD ["python3", "./face_capture.py"]
