@@ -9,4 +9,4 @@ EXPOSE 1883
 
 ENV PATH /usr/sbin:$PATH
 
-ENTRYPOINT ["/usr/sbin/mosquitto"]
+# ENTRYPOINT ["/usr/sbin/mosquitto"]
