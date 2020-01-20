@@ -40,8 +40,8 @@ while True:
         cv.imshow('img', crop_face)
         count += 1
         rv, buf = cv.imencode('.png', crop_face)
-        print("{}".format(rv))
-        mqttclient.publish(LOCAL_MQTT_TOPIC, count)
+        print("Bytes: {}".format(len(bytearray(buf))))
+        mqttclient.publish(LOCAL_MQTT_TOPIC, bytearray(buf))
 
     cv.waitKey(0)
 
