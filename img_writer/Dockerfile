@@ -18,3 +18,6 @@ RUN pip3 install --upgrade s3cmd
 
 WORKDIR /root
 COPY .s3cfg .s3cfg
+COPY image_writer.py .
+
+CMD [ "python3", "./image_writer.py" ]

@@ -25,3 +25,5 @@ ENV PATH /usr/sbin:$PATH
 
 WORkDIR /root
 COPY forwarder.py .
+
+CMD [ "python3", "./forwarder.py" ]
