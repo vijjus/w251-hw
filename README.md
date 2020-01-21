@@ -68,7 +68,16 @@ connected to local broker with rc: 0
 connected to remote broker with rc: 0
 ```
 
-On the VSI, I started another Alpine based MQTT broker on the host network so that it could receive messages from the forwarder running on the TX2. This container is the same as the one running on my host, except it is built for x86_64, while the one on TX2 is running on ARM.
+On the VSI, I started another Alpine based MQTT broker on the host network so that it could receive messages from the forwarder running on the TX2. This container is the same as the one running on my host, except it is built for x86_64, while the one on TX2 is running on ARM. This container is placed on the host network for Internet access.
+
+```
+docker run --rm --name mqtt_broker --net host -p 1883:1883 -it mqttb mosquitto
+WARNING: Published ports are discarded when using host network mode
+1579587254: mosquitto version 1.6.8 starting
+1579587254: Using default config.
+1579587254: Opening ipv4 listen socket on port 1883.
+1579587254: Opening ipv6 listen socket on port 1883.
+```
 
 On the back end I built and ran another container built on Ubuntu. This container has python3, opencv for python and paho-mqtt. Also, the .s3cfg file for my bucket along with the python bsed s3cmd utility was included in this container. Since this container needs to talk to my S3 bucket, I placed this container on the host network as well. It connects to the MQTT broker running in the previous container and registers for the "face_images" topic. When messages are received, it uses OpenCV to convert the byte-stream into .png images, and pushes them into the S3 bucket.
 
