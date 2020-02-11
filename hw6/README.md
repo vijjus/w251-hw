@@ -9,3 +9,13 @@ Huggingface has a pre-trained model called BertForSequenceClassification that is
 | Training Time  | Wall time: 6h 4min 16s | Wall time: 1h 51min 21s | Wall time: 12h 8min 25s |
 | Inference Time | Wall time: 1h 42s      | Wall time: 15min 39s    | Wall time: 1h 42s       |
 | AUC score      | 0.97000                | 0.96990                 | 0.96971                 |
+
+
+Details about the model:
+
+| Hyperparamter       | Value  |
+|---------------------|--------|
+| Max Sequence Length | 220    |
+| Learning Rate       | 2e-5   |
+| Batch Size          | 32     |
+| Classifiaction      | Binary |
