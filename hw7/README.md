@@ -8,7 +8,11 @@ WIDERFace dataset. The model is built from this work:
 Huang J, Rathod V, Sun C, Zhu M, Korattikara A, Fathi A, Fischer I, Wojna Z,
 Song Y, Guadarrama S, Murphy K, CVPR 2017
 
-The latest version of the TensorFlow object detection pre-trained models are based on the MobileNetV3 CNN architecture.
+The latest version of the TensorFlow object detection pre-trained models are based on the MobileNetV3 CNN architecture. The MobileNet architecture aims to reduce computation and improve latency of inference, without sacrificing too much in terms of accuracy. The architecture draws from the Inception architecture and uses 1x1 convolutions and pooling layers to reduce computation and dimensions respectively. Additionally, the V3 version uses the h-swish non-linearity:
+
+h-swish [x] = x * ReLU(6 * (x + 3))/6
+
+V3 small has 1.7 million parameters, and is 27% faster than V2.
 
 Question: Does it achieve reasonable accuracy in your empirical tests? Would you use this solution to develop a robust, 
 production-grade system?
