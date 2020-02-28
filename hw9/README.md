@@ -35,8 +35,44 @@ In the config file, the learning rate was specified as:
 We see from the plot that the learning rate goes up for the first 8000 or so steps, which is what the config file specifies. So I think the model is exploring the best learning rate to rate to start with initially, and it then decays the learning rate when ever the loss plateaus.
 ![alt text](lr.png "Learning Rate")
 
-* How big was your training set (mb)? How many training lines did it contain?
-* What are the files that a TF checkpoint is comprised of?
-* How big is your resulting model checkpoint (mb)?
-* Remember the definition of a "step". How long did an average step take?
-* How does that correlate with the observed network utilization between nodes?
+* __How big was your training set (mb)? How many training lines did it contain?__
+
+The training set was around 620MB for English, and 690MB for German, totaling ~1.3GB. Each corpus had **4524868** records each.
+![alt text](train_size.png "Training Size")
+
+* __What are the files that a TF checkpoint is comprised of?__
+
+The TF checkpoint consists of an index file, the model file itself with the weights and a .meta file.
+![alt text](best_models.png "Best Models")
+
+* __How big is your resulting model checkpoint (mb)?__
+
+The models were around **850MB**.
+
+* __Remember the definition of a "step". How long did an average step take?__
+
+Each step took around 2 minutes:
+
+```
+*** Global step 61700: ***     Train loss: 1.6348 
+time per step = 0:00:1.946
+***     Train Source[0]:     <s> ▁The ▁tour ▁programs ▁last ▁2  7 ▁days ; ▁individual ▁tours ▁are ▁available ▁on ▁request . </s>
+***     Train Target[0]:     <s> ▁Nur ▁der ▁Ba ikal see ▁ergibt ▁sich ▁nicht , ▁at met ▁unter ▁seiner ▁been genden ▁Eis de cke , ▁und ▁die ▁m ann ig falt igen ▁Eis geb il de ▁an ▁den ▁Felsen ▁und ▁Kl ippen ▁ze ugen ▁noch ▁von ▁seinem ▁wil den ▁her bst lichen ▁Kampf ▁mit ▁dem ▁Fro st , ▁der ▁ihn </s>
+***     Train Prediction[0]: <s> ▁Die ▁2 ▁Ort uch see ▁ist ▁sich ▁aus ▁nur ▁sondern met ▁die ▁dem ▁Oberfläche gten ▁Oberfläche zeit cke . ▁sondern ▁ist ▁Sonne är ig falt igen , d unden de ▁sind ▁der ▁W . ▁die ippen . ugen ▁von ▁von ▁der ▁Reichtum den ▁Wasser ben lichen ▁Reichtum . ▁seinen ▁Wasser st . ▁der ▁die </s>
+*** Global step 61800: ***     Train loss: 1.5468 
+time per step = 0:00:1.949
+***     Train Source[0]:     <s> ▁First ▁exp ands ▁beyond ▁Seattle ▁to ▁O ak land , ▁CA . </s>
+***     Train Target[0]:     <s> ▁Erste ▁Exp ansion ▁über ▁Seattle ▁hinaus ▁nach ▁O ak land , ▁Kal ifornien . </s>
+***     Train Prediction[0]: <s> ▁Die ▁Erweiterung ansion ▁nach ▁Seattle ▁hinaus ▁nach ▁O ak land , ▁CA ifornien . </s> </s> . </s> . . . . </s> </s> </s> . . . . . . </s> . . , . , . </s> . </s> . . ▁die . , </s> </s> </s> </s> </s> . </s> </s> </s>
+*** Global step 61900: ***     Train loss: 1.5857 
+time per step = 0:00:1.953
+***     Train Source[0]:     <s> ▁He ▁had ▁asked ▁the ▁President ▁to ▁p ard on ▁Asia ▁Bib i , ▁a ▁Christian ▁woman ▁senten ced ▁to ▁death ▁for ▁bl as ph em y , ▁and ▁had ▁also ▁visited ▁her ▁in ▁prison . </s>
+***     Train Target[0]:     <s> ▁Er ▁hat ▁den ▁Staat spräsidenten ▁gebeten , ▁Asia ▁Bib i , ▁eine ▁Christ in , ▁die ▁wegen ▁Bl as ph em ie ▁zum ▁To de ▁verurteilt ▁worden ▁ist , ▁zu ▁beg n ad igen , ▁und ▁hat ▁sie ▁auch ▁im ▁Gefängnis ▁besucht . </s>
+***     Train Prediction[0]: <s> ▁Er ▁hatte ▁die ▁Präsidenten spräsidenten ▁gebeten , ▁Asia ▁Bib i ▁zu ▁eine ▁christ in , ▁die ▁wegen ▁Bl as ph em ie ▁zum ▁To de ▁verurteilt ▁wurde ▁war , ▁zu ▁beg n ad igen ▁und ▁und ▁auch ▁auch ▁auch ▁im ▁Gefängnis ▁besucht . </s> </s> . . </s> </s> ▁war , , </s> </s> </s>
+*** Global step 62000: ***     Train loss: 1.5968 
+time per step = 0:00:1.945
+```
+
+* __How does that correlate with the observed network utilization between nodes?__
+
+At the end of each training step, the global state is updated. So network activity spikes around that time.
