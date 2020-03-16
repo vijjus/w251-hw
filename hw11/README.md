@@ -24,6 +24,42 @@ y_train.append(r)
 
 ## First Model ##
 
+This is the base model provided, which consists of a 2 level dense network.
+
+```
+def nnmodel(input_dim):
+    model = Sequential()
+    model.add(Dense(32,input_dim=input_dim, activation='relu'))
+    model.add(Dense(16, activation='sigmoid'))
+    model.add(Dense(1))
+    model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
+    return model
+```
+
+The loss does not go below 139 even after full training.
+
+```
+Epoch 1/10
+50001/50001 [==============================] - 51s 1ms/step - loss: 140.3992 - accuracy: 0.0000e+00
+Epoch 2/10
+50001/50001 [==============================] - 52s 1ms/step - loss: 140.0050 - accuracy: 0.0000e+00
+Epoch 3/10
+50001/50001 [==============================] - 51s 1ms/step - loss: 139.5380 - accuracy: 0.0000e+00
+Epoch 4/10
+50001/50001 [==============================] - 52s 1ms/step - loss: 140.0607 - accuracy: 0.0000e+00
+Epoch 5/10
+50001/50001 [==============================] - 52s 1ms/step - loss: 139.2218 - accuracy: 0.0000e+00
+Epoch 6/10
+50001/50001 [==============================] - 54s 1ms/step - loss: 139.3572 - accuracy: 0.0000e+00
+Epoch 7/10
+50001/50001 [==============================] - 53s 1ms/step - loss: 138.7883 - accuracy: 0.0000e+00
+Epoch 8/10
+50001/50001 [==============================] - 50s 995us/step - loss: 138.7486 - accuracy: 0.0000e+00
+Epoch 9/10
+50001/50001 [==============================] - 51s 1ms/step - loss: 139.1639 - accuracy: 0.0000e+00
+Epoch 10/10
+50001/50001 [==============================] - 50s 991us/step - loss: 139.1111 - accuracy: 0.0000e+00
+```
 
 
 ## LSTM Model ##
