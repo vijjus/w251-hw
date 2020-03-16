@@ -1,4 +1,4 @@
-# Lunar Lander on TX #
+# OpenAI Lunar Lander on TX2 #
 
 I trained 4 different models for the Lunar Lander. From reading the OpenAI info about the lander, as well as the code that was
 provided, I concluded that the model is a function approximation of the Q-function in Reinforcement Learning. 
@@ -23,6 +23,7 @@ y_train.append(r)
 ```
 
 ## First Model ##
+
 
 
 ## LSTM Model ##
